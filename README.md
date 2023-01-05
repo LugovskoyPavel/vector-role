@@ -11,21 +11,25 @@ Any pre-requisites that may not be covered by Ansible itself or the role should 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+| Vars	| Description	 | Value | Location |
+| ------------- |:------------------:|:------------------:|:-------------------:|
+| vector_version |	Vector version to install |	0.22.1 |	defaults/main.yml |
+| vector_clickhouse_ip |	Addres of Clickhouse instance |	localhost |	defaults/main.yml |
+| clickhouse_db_name |	Clickhouse DB where to store logs |	"logs" |	defaults/main.yml |
+| clickhouse_table_name |	Clickhouse table name to write logs	| "data_logs" |	defaults/main.yml |
+| vector_url |	URL for Vector download |	https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-1.x86_64.rpm	vars/main.yml |
+| vector_config_dir |	Vector config file location	"/etc/vector" |	vars/main.yml |
+| vector_config |	Vector config file |	value below	default/main.yml |
 
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
 Example Playbook
 ----------------
-`
+```
 - name: Install Vector
   hosts: vector1 
   role:
     -vector 
-`
+```
 
 License
 -------
