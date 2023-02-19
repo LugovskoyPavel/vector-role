@@ -1,28 +1,22 @@
-node("centos"){
+node{
     stage("Git checkout"){
         git branch: 'pipline2', url: 'https://github.com/LugovskoyPavel/vector-role.git'
     }
-    if (prod_run=='true'){
-        stage("terraform infrastructure"){
-            dir('terraform'){
-                sh 'terraform init'
-                sh 'terraform apply --auto-approve'
-            }
-        }    
-        stage("Install roles"){
-            dir('terraform'){
-                sh 'ansible-galaxy install -r ../requirements.yml --roles-path ../roles'
-            }
-        }    
-        stage("Run playbook"){   
-            dir('terraform'){
-                sh 'ANSIBLE_FORCE_COLOR=1 ansible-playbook -i ../inventory/prod/hosts.yml ../site.yml'
-            }    
+    stage("Sample define secret_check"){
+        secret_check=true
+    }
+    stage("Download dependencies"){
+        sh 'ansible-galaxy install -r requirements.yml -p roles'
+    }
+    stage("Run playbook"){
+        if (params.prod_run){
+            sh 'ansible-playbook site.yml -i inventory/prod.yml'
         }
-    }    
-    else{
-        dir('terraform'){
-            sh 'ANSIBLE_FORCE_COLOR=1 ansible-playbook -i ../inventory/prod/hosts.yml ../site.yml --check --diff'
+        else{
+            sh 'ansible-playbook site.yml -i inventory/prod.yml --check --diff'
         }
+
     }
 }
+
+
