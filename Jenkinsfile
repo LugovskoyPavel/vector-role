@@ -11,7 +11,7 @@ pipeline {
         stage('Sync Git') {
             steps {
                 dir('vector-role') {
-                    git branch: 'pipline2', credentialsId: '9f1f1400-ed75-4579-bd4d-fb8849a0ceeb', url: 'git@github.com:danilabar/vector-role.git'
+                    git branch: 'pipline2', url: 'https://github.com/LugovskoyPavel/vector-role.git'
                 }
             }
         }
