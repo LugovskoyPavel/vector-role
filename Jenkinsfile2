@@ -1,6 +1,6 @@
 node("centos"){
     stage("Git checkout"){
-        git branch: 'main', url: 'https://github.com/DennySim/09-ci-04-jenkins-roles'
+        git branch: 'pipline2', url: 'https://github.com/LugovskoyPavel/vector-role.git'
     }
     if (prod_run=='true'){
         stage("terraform infrastructure"){
