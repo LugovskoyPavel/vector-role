@@ -1,6 +1,6 @@
 node{
     stage("Git checkout"){
-        git branch: 'pipline2', url: 'https://github.com/LugovskoyPavel/vector-role.git'
+        git branch: 'pipline2', url: 'https://github.com/LugovskoyPavel/ansible_lug'
     }
     stage("Sample define secret_check"){
         secret_check=true
